@@ -1,21 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
     <script>
-        class Stack{
-            constructor(){
-                this.stack=[]
+        class Stack {
+            constructor() {
+                this.stack = []
             }
-            push(item){
+            push(item) {
                 this.stack.push(item)
             }
+            pop() {
+                this.stack.pop()
+            }
+            peek() {
+                return this.stack[this.getCount() - 1]
+            }
+            getCount() {
+                return this.stack.length
+            }
+            isEmpty() {
+                return this.getCount() === 0
+            }
         }
+
+        //[Leetcode:20] Valid parentheses
+        /**
+         * @param {string} s
+         * @return {boolean}
+         */
+        var isValid=function(s){
+            let map={
+                '(':-1,
+                ')':1,
+                '[':-2,
+                ']':2,
+                '{':-3,
+                '}':3
+            }
+            let stack=[]
+            for(let i=0;i<s.length;i++){
+                if(map[s[i]]<0){
+                    stack.push(s[i])
+                }else{
+                    var tmp=stack.pop()
+                    if(map[tmp]+map[s[i]]!=0){
+                        return false
+                    }
+                }
+            }
+            if(stack.length==0){
+                return true
+            }else{
+                return false
+            }
+        }
+        let s="()]{}"
+        console.log(isValid(s))
     </script>
 </body>
+
 </html>

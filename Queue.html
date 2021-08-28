@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //单链队列
+        class Queue{
+            constructor(){
+                this.queue=[]
+            }
+            enQueue(item){
+                this.queue.push(item)
+            }
+            deQueue(){
+                return this.queue.shift()
+            }
+            getHeader(){
+                return this.queue[0]
+            }
+            getLength(){
+                return this.queue.length
+            }
+            isEmpty(){
+                return this.getLength()===0
+            }
+        }
+        
+        //循环队列
+        class SqQueue{
+            constructor(length){
+                this.queue=new Array(length+1)
+                this.first=0
+                this.last=0
+                this.size=0
+            }
+            enQueue(){
+                //判断是否需要扩容
+                if((this.last+1)%this.queue.length==this.first){
+                    this.resize(this.getLength()*2+1)
+                }
+            }
+            getHeader(){
+                if(this.isEmpty){
+                    throw Error('Queue is empty')
+                }
+                return this.queue[this.first]
+            }
+            getLength(){
+                return this.queue.length-1
+            }
+            isEmpty(){
+                return this.first===this.last
+            }
+            resize(length){
+                let q=new Array(length)
+                for(let i=0;i<length;i++){
+                    q[i]=this.queue[(i+this.first)%this.queue.length]
+                }
+                this.queue=q
+                this.first=0
+                this.last=this.size
+            }
+        }
+    </script>
+</body>
+</html>
