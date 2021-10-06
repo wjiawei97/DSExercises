@@ -1,12 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
-    
+  <script>
+    // Binary Search Tree
+    class Node {
+      constructor(value) {
+        this.value = value
+        this.left = null
+        this.right = null
+      }
+    }
+    class BST {
+      constructor() {
+        this.root = null
+        this.size = 0
+      }
+      getSize() {
+        return this.size
+      }
+      isEmpty() {
+        return this.size === 0
+      }
+      addNode(v) {
+        this.root = this._appendChild(this.root, v)
+      }
+      _appendChild(node, v) {
+        if (!node) {
+          this.size++
+          return new Node(v)
+        }
+        if (v < node.value) {
+          node.left = this._appendChild(node.left, v)
+        } else if (v > node.value) {
+          node.right = this._appendChild(node.right, v)
+        }
+        return node
+      }
+      preTraversal() {
+        _pre(this.root)
+      }
+      _pre(node) {
+        if (node) {
+          console.log(node.value);
+          _pre(node.left)
+          _pre(node.right)
+        }
+      }
+      midTraversal() {
+        _mid(this.root)
+      }
+      _mid(node) {
+        if (node) {
+          this._mid(node.left)
+          console.log(node.value)
+          this._mid(node.right)
+        }
+      }
+      backTraversal() {
+        this._back(this.root)
+      }
+      _back(node) {
+        if (node) {
+          this._back(node.left)
+          this._back(node.right)
+          console.log(node.value)
+        }
+      }
+      // 借助队列
+      breadthTraversal() {
+        if (!this.root) return null
+        let q = new Queue()
+        q.enQueue(this.root)
+        while (!q.isEmpty()) {
+          let tmpNode = q.deQueue()
+          if (tmpNode.left) q.enQueue(tmpNode.left)
+          if (tmpNode.right) q.enQueue(tmpNode.right)
+        }
+      }
+      getMin() {
+        return _getMin(this.root).value
+      }
+      _getMin(node) {
+        if (!node.left) return node
+        return _getMin(node.left)
+      }
+      getMax() {
+        return _getMax(this.root).value
+      }
+      _getMax(node) {
+        if (!node.right) return node
+        return _getMax(node.right)
+      }
+      floor() {
+        let node = this._floor(this.root, v)
+        return node ? node.value : null
+      }
+      _floor(node, v) {
+        if (!node) return null
+        if (node.value === v) return v
+        if (v > node.value) {
+          return this._floor(node.left, v)
+        }
+        //还需再判断当前节点是否还有右子树
+        let right = this._floor(node.right, v)
+        if (right) return right
+        return node
+      }
+    }
+  </script>
 </body>
+
 </html>

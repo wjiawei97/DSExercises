@@ -8,3 +8,6 @@
 
 ## LinkList
 - methods: insertNode,removeNode
+
+## Tree
+- methods: addNode, preTraversal, midTraversal, backTraversal, breadthTraversal, getMin, getMax

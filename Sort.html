@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function swap(array, left, right) {
+      let rightValue = array[right]
+      array[right] = array[left]
+      array[left] = rightValue
+    }
+
+    // bubble sort
+    // O(n^2)
+    let bubbleSort = function (array) {
+      for (let i = 0; i < array.length; i++) {
+        for (let j = 0; j < array.length - i; j++) {
+          if (array[j] > array[j + 1]) {
+            swap(array, j, j + 1)
+          }
+        }
+      }
+    }
+
+
+    // select sort
+    let selectSort = function (array) {
+      for (let i = 0; i < array.length; i++) {
+        let minIndex = i
+        for (let j = i + 1; j < array.length; j++) {
+          if (array[j] < array[minIndex]) {
+            minIndex = j
+          }
+        }
+        swap(array, i, minIndex)
+      }
+    }
+
+    // insert sort
+    let insertSort = function (array) {
+      for (let i = 0; i < array.length; i++) {
+        for (let j = i; j > 0; j--) {
+          if (array[j] < array[j - 1]) {
+            swap(array, j, j - 1)
+          }
+        }
+      }
+    }
+
+    // quick sort
+    let quickSort = function (array, low, high) {
+      if (low < high) {
+        let index = partition(array, low, high)
+        quickSort(array, low, index - 1)
+        quickSort(array, index + 1, high)
+      }
+    }
+    function partition(array, low, high) {
+      swap(array, low, parseInt(Math.random() * (high - low + 1) + low))
+      let pivot = array[low]
+      while (low < high) {
+        while (low < high && array[high] >= pivot) {
+          high--
+        }
+        array[low] = array[high]
+        while (low < high && array[low] <= pivot) {
+          low++
+        }
+        array[high] = array[low]
+      }
+      array[low] = pivot
+      return low
+    }
+
+    // heap sort
+    let heapSort = function (array) {
+      //1. 构建大顶堆
+      for (let i = Math.floor(array.length / 2 - 1); i >= 0; i--) {
+        adjustHeap(array, i, array.length)
+      }
+      // 2. 交换堆顶元素与末尾元素
+      for (j = array.length - 1; j > 0; j--) {
+        swap(array, 0, j)
+        adjustHeap(array, 0, j)
+      }
+    }
+    function adjustHeap(array, i, length) {
+      let tmp = array[i]
+
+      // i为当前节点，k为i的左子节点
+      // 目的：调整每个节点
+      for (let k = 2 * i + 1; k < length; k = k * 2 + 1) {
+        // 让k指向左右子节点中最大的
+        if (k + 1 < length && array[k + 1] > array[k]) {
+          k = k + 1
+        }
+        // 比较k指向的值 vs 当前节点的值
+        if (array[k] > tmp) {
+          array[i] = array[k]
+          i = k
+        } else {
+          break
+        }
+      }
+      array[i] = tmp
+    }
+
+    // let arr = [4, 6, 2, 5, 3]
+    // bubbleSort(arr)
+    // selectSort(arr)
+    // insertSort(arr)
+    // quickSort(arr, 0, arr.length - 1)
+    // heapSort(arr)
+    // console.log(arr);
+
+
+  </script>
+</body>
+
+</html>
