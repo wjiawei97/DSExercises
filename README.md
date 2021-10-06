@@ -1,13 +1,26 @@
-# Data Structure
-## Stack
-- methods: push,pop,peek,getCount,isEmpty
-- Application: 
-    - [Leetcode:20] Valid parentheses
-## Queue (单链队列 && 循环队列)
-- methods: enQueue,deQueue,getHeader,getLength,isEmpty
+# Catalogue for My Algorithm Exercises
+## Array
+- binary search
+- remove element
+- sorted squares
 
 ## LinkList
-- methods: insertNode,removeNode
 
-## Tree
-- methods: addNode, preTraversal, midTraversal, backTraversal, breadthTraversal, getMin, getMax
+## Hash
+
+## String
+
+## Double Pointer
+
+## Stack & Queue
+
+## Binary Tree
+
+## BackTraking Algorithm
+
+## Greedy Algorithm
+
+## Dynamic Programming
+
+
+
